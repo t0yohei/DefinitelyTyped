@@ -1,24 +1,25 @@
 import * as React from "react";
 
-export as namespace CopyToClipboard;
+interface CopyToClipboardOptions {
+  debug?: boolean;
+  message?: string;
+  format?: string; // MIME type
+}
 
-declare class CopyToClipboard extends React.PureComponent<CopyToClipboard.Props> {}
+interface CopyToClipboardProps {
+  children?: React.ReactNode;
+  text: string;
+  onCopy?(text: string, result: boolean): void;
+  options?: CopyToClipboardOptions;
+}
+
+declare class CopyToClipboard extends React.PureComponent<CopyToClipboardProps> {}
 
 declare namespace CopyToClipboard {
-    class CopyToClipboard extends React.PureComponent<Props> {}
-
-    interface Options {
-        debug?: boolean | undefined;
-        message?: string | undefined;
-        format?: string | undefined; // MIME type
-    }
-
-    interface Props {
-        children?: React.ReactNode;
-        text: string;
-        onCopy?(text: string, result: boolean): void;
-        options?: Options | undefined;
-    }
+  interface Props extends CopyToClipboardProps {}
+  interface Options extends CopyToClipboardOptions {}
 }
+
+export as namespace CopyToClipboard;
 
 export = CopyToClipboard;
